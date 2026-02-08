@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from model_loader import load_model, infer_video
 from flask_cors import CORS
@@ -21,4 +22,5 @@ def predict():
     return jsonify({"prediction": prediction})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9000)
+    port = int(os.environ.get("PORT", 10000))  # Render provides PORT
+    app.run(host="0.0.0.0", port=port,)
